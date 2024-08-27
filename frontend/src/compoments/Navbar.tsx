@@ -12,12 +12,12 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-primary3 fixed top-0 w-full z-20">
+    <nav className="bg-primary1 fixed top-0 w-full z-20 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="text-white font-bold text-xl">
-              <img src='src/assets/images/LOGO2.png' className='h-12 w-12'/>
+              <img src='src/assets/images/LOGO2.png' className='h-12 w-12 '/>
             </Link>
           </div>
           <div className="hidden md:block">

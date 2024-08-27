@@ -24,6 +24,9 @@ export class TuteurService {
     
     // Vérifier si l'étudiant avec l'ID spécifié existe
     const student = await this.studentRepository.findOne({where:{student_id:studentId}});
+    if(!studentId){
+      throw new NotFoundException( 'studentId is required')
+    }
     if (!student) {
       throw new BadRequestException(`Student with ID ${studentId} not found`);
     }
@@ -42,4 +45,38 @@ export class TuteurService {
     // Retourner le tuteur sous forme de DTO
     return plainToInstance(TuteurDto, tuteur);
   }
+  async findTuteurById(tu_id: number): Promise<TuteurDto> {
+    const tuteur = await this.tuteurRepository.findOne({
+      where: { tu_id:tu_id },
+      relations: ['student'],
+    });
+
+    if (!tuteur) {
+      throw new NotFoundException(`teacher with ID ${tu_id} not found`);
+    }
+
+    return plainToInstance(TuteurDto, tuteur);
+  }
+ async findOne(tu_id:number):Promise<Tuteur>{
+  return await this.tuteurRepository.findOne({where:{tu_id}})
+
+ }
+ async findAll():Promise<Tuteur[]>{
+  return this.tuteurRepository.find()
+ }
+ async remove(id: number): Promise<void> {
+  const result = await this.tuteurRepository.delete(id)
+;
+  if (result.affected === 0) {
+    throw new NotFoundException(`tuteur with ID ${id} not found`);
+  }
 }
+async update(tu_id:number,updateTuteurDto:updateTuteurDto):Promise<Tuteur>
+{
+  const tuteur=await this.tuteurRepository.findOne({where:{tu_id}})
+  if(!tuteur){
+    throw new NotFoundException(`tuteur avec l'tu_id ${tu_id} not found`)
+  }
+  Object.assign(tuteur,updateTuteurDto)
+  return this.tuteurRepository.save(tuteur)
+}}

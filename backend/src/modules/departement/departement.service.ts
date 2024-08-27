@@ -27,7 +27,7 @@ export class DepartementService {
   async findOne(dept_id: number): Promise<Departement> {
     const Departement = await this.departementRepository.findOneBy({ dept_id });
     if (!Departement) {
-      throw new NotFoundException(`Teacher with ID ${dept_id} not found`);
+      throw new NotFoundException(`departement with ID ${dept_id} not found`);
     }
     return Departement;
   }

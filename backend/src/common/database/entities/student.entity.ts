@@ -34,7 +34,7 @@ export class Student {
   @ManyToOne(()=>Specialite,specialite=>specialite.students,{onDelete:'CASCADE'})
   specialite:Specialite;
 
-  @OneToMany(()=>Tuteur,tuteur=>tuteur.student)
+  @ManyToOne(()=>Tuteur,tuteur=>tuteur.student)
   @JoinColumn()
   tuteurs:Tuteur[];
 

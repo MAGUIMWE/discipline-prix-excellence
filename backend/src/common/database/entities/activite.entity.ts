@@ -10,6 +10,6 @@ export class Activite{
     @Column()
     description:string;
     @Column()
-    image:string;
+    icon:string;
 
 }

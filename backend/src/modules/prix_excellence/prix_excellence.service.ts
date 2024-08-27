@@ -39,6 +39,23 @@ export class PrixExcellenceService {
     await this.prixEcellenceRepository.save(prixExcellence);
     return plainToInstance(PrixExcellenceDto, prixExcellence);
   }
+  async findPrixExcellenceById(prix_id: number): Promise<PrixExcellenceDto> {
+    const prix = await this.prixEcellenceRepository.findOne({
+      where: { prix_id:prix_id },
+      relations: ['departement'],
+    });
+
+    if (!PrixExcellence) {
+      throw new NotFoundException(`prixExcellence with ID ${prix_id} not found`);
+    }
+
+    return plainToInstance(PrixExcellenceDto, PrixExcellence);
+  }
+
+  async findAllprixExcellence(): Promise<PrixExcellenceDto[]> {
+    const teacher = await this.prixEcellenceRepository.find({ relations: ['student'] });
+    return teacher.map(prixExcellence => plainToInstance(PrixExcellenceDto, prixExcellence));
+  }
     }
     
 

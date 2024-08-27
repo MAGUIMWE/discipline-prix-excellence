@@ -20,6 +20,12 @@ export class PrixExcellenceController {
   async createPrixExcellence(@Body() createPrixExcellenceDto: createPrixExcellenceDto): Promise<PrixExcellenceDto> {
     return this.prixExcellenceservice.createPrixExcellence(createPrixExcellenceDto);
   }
+  
+  @Get()
+  @ApiOperation({ summary: 'Get all teachers' })
+  async findAll(): Promise<PrixExcellenceDto[]> {
+    return this.prixExcellenceservice.findAllprixExcellence();
+  }
 
   
 }
